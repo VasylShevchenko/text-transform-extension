@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Lato, Arial, sans-serif;
+}
+
+.main-block {
+  width: 450px;
+  max-height: 275px;
+}
+
+.dashboard {
+  position: relative;
+}
+
+.nav-bar {
+  width: 100%;
+  min-height: 55px;
+  height: 55px;
+  background-color: #fafafa;
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  padding: 12px 15px;
+
+  img {
+    width: 104px;
+    height: 25px;
+    margin: auto;
+  }
+}
