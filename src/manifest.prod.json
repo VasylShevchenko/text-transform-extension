@@ -3,11 +3,6 @@
   "description": "Easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.",
   "version": "1.0",
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-//  "background": {
-//    "persistent": true,
-//    "scripts": ["extension.js"]
-//  },
   "browser_action": {
     "default_icon": "favicon.ico",
     "default_title": "Text Transform",
@@ -18,6 +13,7 @@
     "<all_urls>",
     "identity"
   ],
+  "content_security_policy": "script-src 'self' https://connect.facebook.net/en_US/sdk.js 'unsafe-eval'; object-src 'self'",
   "web_accessible_resources": [
     "assets/styles/*",
     "assets/js/*",

@@ -6,9 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod",
+    "build:prod2": "ng build --sourceMap false --prod true",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "developing": "ng build --watch"
   },
   "private": true,
   "dependencies": {
