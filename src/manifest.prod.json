@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Text Transform",
+  "short_name": "Text Transform",
   "description": "Easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.",
   "version": "1.0",
   "browser_action": {
