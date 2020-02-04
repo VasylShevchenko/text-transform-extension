@@ -1,31 +1,233 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-  font-family: Lato, Arial, sans-serif;
+  font-family: 'Roboto',arial,sans-serif;
+  width: 702px;
+  max-height: 340px;
+  background-color: #F5F5F5;
+  color: #252525;
+  font-size: 14px;
+  margin: 0;
 }
 
-.main-block {
-  width: 450px;
-  max-height: 275px;
+img {
+  vertical-align: middle;
+  border-style: none;
 }
 
-.dashboard {
-  position: relative;
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline:0 !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
 }
 
-.nav-bar {
+textarea::placeholder {
+  color: #9c9c9c;
+}
+
+.va-m {
+  vertical-align:middle;
+}
+
+.content {
+  height: 310px;
+  text-align: initial;
+}
+
+.content-general {
+  display: inline-flex;
+  height: calc(100% - 60px);
+  margin: 30px;
+}
+
+.left-side{
   width: 100%;
-  min-height: 55px;
-  height: 55px;
-  background-color: #fafafa;
-  margin-bottom: 20px;
+  padding-right: 21px;
+
+  display:inline-block;
+  position:relative;
+}
+.right-side {
+  width: 292px;
+  min-width: 292px;
+  margin-left: auto;
 }
 
-.navbar-brand {
-  padding: 12px 15px;
+.search-bar {
+  margin: 0 0 15px;
+}
 
-  img {
-    width: 104px;
-    height: 25px;
-    margin: auto;
+.text-input {
+  font-size: 14px;
+  height: 23px;
+  width: calc(100% - 4px);
+  padding: 0;
+}
+
+.textarea-text {
+  width: 100%;
+  letter-spacing: 0.03em;
+  height: calc(50% - 5px);
+  //padding: 20px;
+  padding: 10px 30px 10px 10px;
+  font-size: 14px;
+  resize: none;
+  margin-bottom: 7px;
+  line-height: 130%;
+  background: #FFFFFF;
+  border: 0.5px solid #E8E8E8;
+  box-sizing: border-box;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+
+  &:active,
+  &:focus {
+    border: 0.5px solid #0F8CFF;
+    box-shadow: inset -1px -1px 3px #0F8CFF, inset 1px 1px 3px #0F8CFF;
   }
+}
+
+.tt-footer {
+  height: 30px;
+  padding: 0 30px;
+  background-color: #FFFFFF;
+  color: #636363;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tt-a {
+  color: #4285f4;
+  display: inline;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.tt-a:hover {
+  span {
+    text-decoration: underline;
+  }
+}
+
+.tt-btn-left {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+.tt-btn-right {
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+}
+
+.text-c {
+  text-align: center;
+}
+
+.text-l {
+  text-align: left;
+}
+
+.text-r {
+  text-align: right;
+}
+
+.pd-l-15 {
+  padding-left: 15px;
+}
+
+.btn-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  width: 140px;
+  max-width: 140px;
+  height: 36px;
+  float: left;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: default;
+  font-size: 13px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  line-height: 36px;
+  min-width: 60px;
+  outline: 0;
+  letter-spacing: 0.03em;
+  color: #fff;
+  flex: 1 1 auto;
+  transition: 0.1s;
+}
+
+.btn-img {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+.btn-clear {
+  width: 10px;
+  height: 10px;
+}
+
+.btn-primary {
+  background: #0F8CFF;
+  border: 1px solid #0F8CFF;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px rgba(55, 55, 55, 0.15), 0 1px 1px rgba(55, 55, 55, 0.15);
+
+  &:hover {
+    background: #0C70CC;
+    border: 1px solid #0C70CC;
+  }
+}
+
+.btn-red {
+  color: #E50D12;
+  background: #FFFFFF;
+  border: 1px solid #E50D12;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px rgba(55, 55, 55, 0.15), 0 1px 1px rgba(55, 55, 55, 0.15);
+
+  &:hover {
+    color: #fff;
+    background: #E60D12;
+    border: 1px solid #E50D12;
+  }
+
+  &:active {
+    color: #fff;
+    background: #A80029;
+    border: 1px solid #A80029;
+  }
+}
+
+.text-divider {
+  text-transform: uppercase;
+  margin: 5px 0 10px 0;
+  font-size: 9px;
+  line-height: 12px;
+  color: #9c9c9c;
+}
+
+.source-header {
+  position: absolute;
+  right: 35px;
+  top: 10px;
 }
