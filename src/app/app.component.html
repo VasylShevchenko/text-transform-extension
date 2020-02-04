@@ -1,3 +1,80 @@
-<button type="button" class="btn btn-outline-primary">Primary</button>
-<button type="button" class="btn btn-outline-dark">Dark</button>
-<router-outlet></router-outlet>
+<app-alert></app-alert>
+
+<div class="content-general">
+  <div class="left-side">
+
+    <div role="button" class="source-header" tabindex="0" style="user-select: none;" (click)="clear()" *ngIf="showClear">
+      <img alt="Angular" title="Angular" class="btn-clear" src="../assets/images/close.svg">
+    </div>
+
+    <textarea #textAreaInput
+              rows="1"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              class="textarea-text"
+              placeholder="Paste text here"
+              (input)="inputChange($event.target.value)"
+    ></textarea>
+
+    <textarea #textAreaOutput
+              rows="1"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              class="textarea-text"
+              placeholder="Transformed text will appear here"
+    ></textarea>
+
+  </div>
+
+  <div class="right-side">
+
+    <div class="btn-row">
+      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToLowerCase()">
+        lowercase
+      </div>
+      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToUpperCase()">
+        UPPERCASE
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToSentenceCase()">
+        Sentence case
+      </div>
+      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToTitleCase()">
+        Titlecase
+      </div>
+    </div>
+
+    <div class="text-divider">Programming cases: Ruby, Python, JS, Java, TypeScript, etc</div>
+
+    <div class="btn-row">
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToSnakeCase()">
+        snake_case
+      </div>
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToScreamingSnake()">
+        SCREAMING_SNAKE
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToCamelCase()">
+        camelCase
+      </div>
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToPascalCase()">
+        PascalCase
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToKebabCase()">
+        kebab-case
+      </div>
+      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToTrainCase()">
+        Train-Case
+      </div>
+    </div>
+  </div>
+</div>
