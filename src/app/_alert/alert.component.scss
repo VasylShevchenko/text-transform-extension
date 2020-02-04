@@ -1,0 +1,36 @@
+.text-copied {
+  z-index: 0;
+  text-align: center;
+  color: #FFFFFF;
+  width: 124px;
+  height: 24px;
+  left: 41px;
+  top: 155px;
+  line-height: 26px;
+  font-size: 11px;
+  background: #0AD196;
+  box-shadow: 0 4px 5px rgba(55, 55, 55, 0.1);
+  border-radius: 6px;
+}
+
+.done {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(-1em);
+  transition: all .500s;
+
+  width: 124px;
+  height: 24px;
+  left: 41px;
+  top: 155px;
+}
+.copied .done {
+  z-index: 1;
+  opacity: 1;
+  transform: translateY(-2em);
+}
+
+
+
+
+
