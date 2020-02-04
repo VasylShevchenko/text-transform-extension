@@ -1,6 +1,8 @@
 # Text Transform Extension
 
-![Text Transform Extension](doc/preview.gif?raw=true "Text Transform Extension")
+<p align="center">
+  <img src="doc/preview.gif">
+</p>
 
 Chrome Extension for easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.
 
