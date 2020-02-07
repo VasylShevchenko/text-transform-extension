@@ -1,83 +1,93 @@
-<app-alert></app-alert>
+<div class="content">
+  <app-alert></app-alert>
 
-<div class="content-general">
-  <div class="left-side">
+  <div class="content-general">
+    <div class="left-side">
 
-    <div role="button" class="source-header" tabindex="0" style="user-select: none;" (click)="clear()" *ngIf="showClear">
-      <img alt="Angular" title="Angular" class="btn-clear" src="../assets/images/close.svg">
+      <div role="button" class="source-header" tabindex="0" style="user-select: none;" (click)="clear()" *ngIf="showClear">
+        <img alt="Angular" title="Angular" class="btn-clear" src="../assets/images/close.svg">
+      </div>
+
+      <textarea #textAreaInput
+                rows="1"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                class="textarea-text"
+                placeholder="Paste text here"
+                (input)="inputChange($event.target.value)"
+      ></textarea>
+
+      <textarea #textAreaOutput
+                rows="1"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                class="textarea-text"
+                placeholder="Transformed text will appear here"
+      ></textarea>
+
     </div>
 
-    <textarea #textAreaInput
-              rows="1"
-              spellcheck="false"
-              autocapitalize="off"
-              autocomplete="off"
-              class="textarea-text"
-              placeholder="Paste text here"
-              (input)="inputChange($event.target.value)"
-    ></textarea>
+    <div class="right-side">
 
-    <textarea #textAreaOutput
-              rows="1"
-              spellcheck="false"
-              autocapitalize="off"
-              autocomplete="off"
-              class="textarea-text"
-              placeholder="Transformed text will appear here"
-    ></textarea>
-
-  </div>
-
-  <div class="right-side">
-
-    <div class="btn-row">
-      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToLowerCase()">
-        lowercase
+      <div class="btn-row">
+        <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToLowerCase()">
+          lowercase
+        </div>
+        <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToUpperCase()">
+          UPPERCASE
+        </div>
       </div>
-      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToUpperCase()">
-        UPPERCASE
-      </div>
-    </div>
 
-    <div class="btn-row">
-      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToSentenceCase()">
-        Sentence case
+      <div class="btn-row">
+        <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToSentenceCase()">
+          Sentence case
+        </div>
+        <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToTitleCase()">
+          Titlecase
+        </div>
       </div>
-      <div role="button" class="btn text-c btn-primary" tabindex="0" style="user-select: none;" (click)="convertToTitleCase()">
-        Titlecase
+
+      <div class="text-divider">Programming cases: Ruby, Python, JS, Java, TypeScript, etc</div>
+
+      <div class="btn-row">
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToSnakeCase()">
+          snake_case
+        </div>
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToScreamingSnake()">
+          SCREAMING_SNAKE
+        </div>
       </div>
-    </div>
 
-    <div class="text-divider">Programming cases: Ruby, Python, JS, Java, TypeScript, etc</div>
-
-    <div class="btn-row">
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToSnakeCase()">
-        snake_case
+      <div class="btn-row">
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToCamelCase()">
+          camelCase
+        </div>
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToPascalCase()">
+          PascalCase
+        </div>
       </div>
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToScreamingSnake()">
-        SCREAMING_SNAKE
-      </div>
-    </div>
 
-    <div class="btn-row">
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToCamelCase()">
-        camelCase
-      </div>
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToPascalCase()">
-        PascalCase
-      </div>
-    </div>
-
-
-
-
-    <div class="btn-row">
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToKebabCase()">
-        kebab-case
-      </div>
-      <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToTrainCase()">
-        Train-Case
+      <div class="btn-row">
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToKebabCase()">
+          kebab-case
+        </div>
+        <div role="button" class="btn btn-red text-c" tabindex="0" style="user-select: none;" (click)="convertToTrainCase()">
+          Train-Case
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<footer class="tt-footer">
+  <a class="tt-a" id="translate-link" target="_blank" href="https://github.com/VasylShevchenko/text-transform-extension" (click)=" sendEventToAnalytics('goToGitHub')">
+    <img alt="Angular" title="Angular" class="tt-btn-left" src="assets/images/github.svg">
+    <span class="va-m">GitHub</span>
+  </a>
+  <a class="tt-a" id="options-link" target="_blank" href="https://chrome.google.com/webstore/category/extensions" (click)=" sendEventToAnalytics('goGoogleChromeExtensions')">
+    <span class="va-m">Text Transform Extension</span>
+    <img alt="Angular" title="Angular" class="tt-btn-right" src="../assets/images/google-chrome-extensions.svg">
+  </a>
+</footer>

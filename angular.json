@@ -46,6 +46,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.json",
+              "src/analytics.js",
               "src/extension.js"
             ],
             "styles": [

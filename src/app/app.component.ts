@@ -1,8 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {LowerCasePipe, UpperCasePipe, TitleCasePipe} from '@angular/common';
-import {AlertService} from './_alert/alert.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { LowerCasePipe, UpperCasePipe, TitleCasePipe } from '@angular/common';
+import { environment } from '../environments/environment';
+import { AlertService } from './_alert/alert.service';
 
 declare var chrome;
+declare var _gaq;
 
 @Component({
   selector: 'app-root',
@@ -47,6 +49,8 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInput();
     if (textInput === '') { return; }
 
+    this.sendEventToAnalytics('convertToUpperCase');
+
     const textTransform = textInput.toUpperCase();
 
     this.putTextOutput(textTransform);
@@ -55,6 +59,8 @@ export class AppComponent implements OnInit {
   convertToLowerCase() {
     const textInput = this.getTextInput();
     if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToLowerCase');
 
     const textTransform = textInput.toLowerCase();
 
@@ -65,6 +71,8 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInput();
     if (textInput === '') { return; }
 
+    this.sendEventToAnalytics('convertToTitleCase');
+
     const textTransform = this.TitleCase.transform(textInput);
 
     this.putTextOutput(textTransform);
@@ -73,6 +81,8 @@ export class AppComponent implements OnInit {
   convertToSentenceCase() {
     const textInput = this.getTextInput();
     if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToSentenceCase');
 
     const text = textInput.toLowerCase();
 
@@ -97,6 +107,8 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
 
+    this.sendEventToAnalytics('convertToSnakeCase');
+
     const text = textInput.toLowerCase();
 
     let result = '';
@@ -114,6 +126,8 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
 
+    this.sendEventToAnalytics('convertToCamelCase');
+
     const result = textInput.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
 
     this.putTextOutput(result);
@@ -122,6 +136,8 @@ export class AppComponent implements OnInit {
   convertToPascalCase() {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToPascalCase');
 
     const text: any = this.TitleCase.transform(textInput);
 
@@ -142,6 +158,8 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
 
+    this.sendEventToAnalytics('convertToScreamingSnake');
+
     const text = textInput.toUpperCase();
 
     let result = '';
@@ -159,8 +177,9 @@ export class AppComponent implements OnInit {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
 
-    const text: any = this.TitleCase.transform(textInput);
+    this.sendEventToAnalytics('convertToTrainCase');
 
+    const text: any = this.TitleCase.transform(textInput);
 
     let result = '';
     let letter;
@@ -176,6 +195,8 @@ export class AppComponent implements OnInit {
   convertToKebabCase() {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToKebabCase');
 
     const text = textInput.toLowerCase();
 
@@ -204,6 +225,12 @@ export class AppComponent implements OnInit {
   putTextOutput(text) {
     this.textAreaOutput.nativeElement.value = text;
     this.copyClipboard(text);
+  }
+
+  sendEventToAnalytics(event) {
+    // if (environment.production) {
+      _gaq.push(['_trackEvent', event, 'clicked']);
+    // }
   }
 
   copyClipboard(text) {
