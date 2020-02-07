@@ -235,7 +235,11 @@ export class AppComponent implements OnInit {
 
   sendEventToAnalytics(event) {
     if (environment.production) {
-      _gaq.push(['_trackEvent', event, 'clicked']);
+      try {
+        _gaq.push(['_trackEvent', event, 'clicked']);
+      } catch (error) {
+        console.log('can\'t send ga');
+      }
     }
   }
 
