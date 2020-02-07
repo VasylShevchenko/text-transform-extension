@@ -36,6 +36,12 @@ export class AppComponent implements OnInit {
         this.textAreaInput.nativeElement.focus();
       }
     });
+
+    if (environment.production) {
+      console.log('production');
+    } else {
+      console.log('development');
+    }
   }
 
   toCopy() {
@@ -228,9 +234,9 @@ export class AppComponent implements OnInit {
   }
 
   sendEventToAnalytics(event) {
-    // if (environment.production) {
+    if (environment.production) {
       _gaq.push(['_trackEvent', event, 'clicked']);
-    // }
+    }
   }
 
   copyClipboard(text) {
@@ -249,6 +255,8 @@ export class AppComponent implements OnInit {
   }
 
   clear() {
+    this.sendEventToAnalytics('clear');
+
     this.textAreaInput.nativeElement.value = '';
     this.showClear = '';
     this.textAreaInput.nativeElement.focus();
