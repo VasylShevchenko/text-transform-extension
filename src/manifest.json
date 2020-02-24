@@ -19,7 +19,9 @@
   "permissions": [
     "activeTab",
     "<all_urls>",
-    "identity"
+    "identity",
+    "clipboardRead",
+    "clipboardWrite"
   ],
   "web_accessible_resources": [
     "assets/styles/*",

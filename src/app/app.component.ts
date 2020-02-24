@@ -30,10 +30,12 @@ export class AppComponent implements OnInit {
     chrome.tabs.executeScript({code: 'window.getSelection().toString();'}, selectedText => {
       if (selectedText[0]) {
         // (document.getElementById('text-input') as HTMLInputElement).value = selectedText[0];
-        this.textAreaInput.nativeElement.value = selectedText[0];
+        this.textAreaInput.nativeElement.value = selectedText[0].trim().replace(/\s\s+/g, ' ');
         this.textAreaInput.nativeElement.focus();
       } else {
         this.textAreaInput.nativeElement.focus();
+        document.execCommand('paste');
+        this.textAreaInput.nativeElement.value = this.textAreaInput.nativeElement.value.trim().replace(/\s\s+/g, ' ');
       }
     });
 
@@ -224,7 +226,8 @@ export class AppComponent implements OnInit {
   getTextInputForProgramming() {
     return this.textAreaInput.nativeElement.value
       .trim()
-      .replace(/[^a-zA-Z ]/g, '')
+      .replace(/[^a-zA-Z1-9 ]/g, '')
+      .trim()
       .replace(/\s\s+/g, ' ');
   }
 
