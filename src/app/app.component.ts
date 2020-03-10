@@ -32,11 +32,10 @@ export class AppComponent implements OnInit {
         // (document.getElementById('text-input') as HTMLInputElement).value = selectedText[0];
         this.textAreaInput.nativeElement.value = selectedText[0].trim().replace(/\s\s+/g, ' ');
         this.textAreaInput.nativeElement.focus();
-      } else {
-        this.textAreaInput.nativeElement.focus();
-        document.execCommand('paste');
-        this.textAreaInput.nativeElement.value = this.textAreaInput.nativeElement.value.trim().replace(/\s\s+/g, ' ');
       }
+      // this.textAreaInput.nativeElement.focus();
+      // document.execCommand('paste');
+      // this.textAreaInput.nativeElement.value = this.textAreaInput.nativeElement.value.trim().replace(/\s\s+/g, ' ');
     });
 
     if (environment.production) {
