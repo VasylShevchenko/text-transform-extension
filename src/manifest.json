@@ -17,9 +17,7 @@
     "128": "assets/images/icon128.png"
   },
   "permissions": [
-    "activeTab",
-    "<all_urls>",
-    "identity"
+    "activeTab"
   ],
   "web_accessible_resources": [
     "assets/styles/*",

@@ -225,7 +225,7 @@ export class AppComponent implements OnInit {
   getTextInputForProgramming() {
     return this.textAreaInput.nativeElement.value
       .trim()
-      .replace(/[^a-zA-Z1-9 ]/g, '')
+      .replace(/[^a-zA-Zа-я 1-9\p{L} ]/g, '')
       .trim()
       .replace(/\s\s+/g, ' ');
   }
