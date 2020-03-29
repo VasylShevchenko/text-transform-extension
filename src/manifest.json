@@ -3,7 +3,7 @@
   "name": "Text Transform",
   "short_name": "TT",
   "description": "Easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.",
-  "version": "1.2",
+  "version": "1.3",
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "browser_action": {
     "default_icon": "favicon.ico",
