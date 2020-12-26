@@ -27,6 +27,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.insertSelectedTextToTextArea();
+
+    if (environment.production) {
+      console.log('production');
+    } else {
+      console.log('development');
+    }
+  }
+
+  insertSelectedTextToTextArea() {
     chrome.tabs.executeScript({code: 'window.getSelection().toString();'}, selectedText => {
       if (selectedText[0]) {
         // (document.getElementById('text-input') as HTMLInputElement).value = selectedText[0];
@@ -36,19 +46,6 @@ export class AppComponent implements OnInit {
       this.textAreaInput.nativeElement.focus();
       this.textAreaInput.nativeElement.value = this.textAreaInput.nativeElement.value.trim().replace(/\s\s+/g, ' ');
     });
-
-    if (environment.production) {
-      console.log('production');
-    } else {
-      console.log('development');
-    }
-  }
-
-  toCopy() {
-    // console.log('aa');
-    // chrome.tabs.executeScript( { code: 'window.getSelection().toString();'}, selectedText => {
-    //   (document.getElementById('text-input') as HTMLInputElement).value = selectedText[0];
-    // });
   }
 
   convertToUpperCase() {
