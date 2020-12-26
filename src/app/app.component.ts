@@ -103,6 +103,8 @@ export class AppComponent implements OnInit {
       }
       result += letter;
     }
+
+    result = result.replace(/ i /, ' I ');
     this.putTextOutput(result);
   }
 
