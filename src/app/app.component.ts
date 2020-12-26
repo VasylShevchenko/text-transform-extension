@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
     this.insertSelectedTextToTextArea();
 
     if (environment.production) {
-      console.log('production');
+      console.log('production ' + environment.extension_version);
     } else {
-      console.log('development');
+      console.log('development ' + environment.extension_version);
     }
   }
 
