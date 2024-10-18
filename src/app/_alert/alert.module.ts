@@ -10,9 +10,6 @@ import { AlertComponent } from './alert.component';
     declarations: [
         AlertComponent
     ],
-    entryComponents: [
-        AlertComponent
-    ],
     providers: [
         AlertService
     ],
