@@ -36,7 +36,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/text-transform"
+              "base": "dist/text-transform",
+              "browser": ""
             },
             "index": "src/index.html",
             "polyfills": [
