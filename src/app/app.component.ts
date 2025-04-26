@@ -8,9 +8,10 @@ declare var chrome;
 declare var _gaq;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
 
@@ -244,7 +245,7 @@ export class AppComponent implements OnInit {
   getTextInputForProgramming() {
     return this.textAreaInput.nativeElement.value
       .trim()
-      .replace(/[^a-zA-Zа-я 1-9\p{L} ]/g, '')
+      .replace(/[^a-zA-Zа-я 1-9\p{L} ]/u, '')
       .trim()
       .replace(/\s\s+/g, ' ');
   }
