@@ -8,7 +8,7 @@ Description: Chrome Extension for easily changes the regional texture: lower reg
 
 # Link to browser extensions
 
-### [Text Transform](https://chromewebstore.google.com/detail/text-transform/lngoloonfgohfhnpcgkfgnfikeedbhgg) <a href="https://chrome.google.com/webstore/detail/autoviewed/occcjmolphcfebdeichmoflmfgeefjef"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" width="24" /></a>
+### [Text Transform - Chrome Web Store](https://chromewebstore.google.com/detail/text-transform/lngoloonfgohfhnpcgkfgnfikeedbhgg) <a href="https://chrome.google.com/webstore/detail/autoviewed/occcjmolphcfebdeichmoflmfgeefjef"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" width="24" /></a>
 
 ### History
 
