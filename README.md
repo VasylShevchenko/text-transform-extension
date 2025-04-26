@@ -47,6 +47,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## TODO
 
+- [ ] Add testing (https://angular.dev/guide/testing)
+
 - [ ] Add words counter
 
 - [ ] Return Future: insert selected text from browser to extension
