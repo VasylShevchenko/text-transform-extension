@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LowerCasePipe, UpperCasePipe, TitleCasePipe } from '@angular/common';
 import { environment } from '../environments/environment';
 import { AlertService } from './_alert/alert.service';
+import { VERSION } from '@angular/core';
 
 declare var chrome;
 declare var _gaq;
@@ -27,22 +28,46 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    chrome.tabs.executeScript({code: 'window.getSelection().toString();'}, selectedText => {
-      if (selectedText[0]) {
-        // (document.getElementById('text-input') as HTMLInputElement).value = selectedText[0];
-        this.textAreaInput.nativeElement.value = selectedText[0].trim().replace(/\s\s+/g, ' ');
-        this.textAreaInput.nativeElement.focus();
-      }
-      this.textAreaInput.nativeElement.focus();
-      this.textAreaInput.nativeElement.value = this.textAreaInput.nativeElement.value.trim().replace(/\s\s+/g, ' ');
-    });
+    // // TODO Future: insert selected text
+    // chrome.tabs.query({active: true}, function(tabs) {
+    //   const tab = tabs[0];
+    //   if (tab.url?.startsWith('chrome://')) {
+    //     console.log('Open on chrome://');
+    //     return undefined;
+    //   }
+    //   try {
+    //     chrome.scripting.executeScript(
+    //       {
+    //         target: {tabId: tab.id},
+    //         function: () => {
+    //           // alert(getSelection().toString());
+    //           // document.getElementById('text-input').focus();
+    //           // document.getElementById('text-input').innerHTML = getSelection().toString();
+    //
+    //           chrome.storage.local.set({selectedText: getSelection().toString()});
+    //           // chrome.storage.local.set({selectedText: getSelection().toString().trim().replace(/\s\s+/g, ' ')});
+    //         }
+    //       }
+    //     );
+    //   } catch (err) {
+    //     console.error(`failed to execute script: ${err}`);
+    //   }
+    // });
+    // this.pasteSelectedText();
 
-    if (environment.production) {
-      console.log('production ' + environment.extension_version);
-    } else {
-      console.log('development ' + environment.extension_version);
-    }
+    const mode = environment.production ? 'Production' : 'Development';
+    console.log(mode + ' | Extension version: ' + environment.extension_version + '| Angular version: ' + VERSION.full);
   }
+
+  // // TODO Future: insert selected text
+  // pasteSelectedText() {
+  //   chrome.storage.local.get(['selectedText']).then((result) => {
+  //     this.textAreaInput.nativeElement.focus();
+  //     this.textAreaInput.nativeElement.value = result.selectedText;
+  //     console.log('selectedText: ' + result.selectedText);
+  //   });
+  //   chrome.storage.local.remove('selectedText');
+  // }
 
   convertToUpperCase() {
     const textInput = this.getTextInput();
@@ -268,5 +293,3 @@ export class AppComponent implements OnInit {
   }
 
 }
-
-
