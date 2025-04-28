@@ -1,8 +1,7 @@
-# <center> Text Transform Extension </center>
-
-<p align="center">
-  <img src="doc/preview.gif">
-</p>
+<div align="center">
+  <h1>Text Transform Extension</h1>
+  <img src="doc/preview.gif" alt='preview.gif'>
+</div>
 
 Description: Chrome Extension for easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.
 
@@ -33,7 +32,7 @@ $ ng build --watch
 $ ng build --configuration production
 ```
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20. Current version of Angular CLI 18.2.9
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20. Current version of Angular CLI 19.2.8
 
 [//]: # (## Development server)
 
@@ -47,11 +46,61 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## TODO
 
-- [ ] Add testing (https://angular.dev/guide/testing)
-
 - [ ] Add words counter
 
+- [ ] Add testing (https://angular.dev/guide/testing)
+
+- [ ] Code refactoring: Use ngSrc (NgOptimizedImage directive) to improve performance
+
+- [ ] Code refactoring: (input)="inputChange($event.target.value)"
+
 - [ ] Return Future: insert selected text from browser to extension
+
+```angular
+  ngOnInit() {
+    ...
+  
+    // TODO Future: insert selected text
+    chrome.tabs.query({active: true}, function(tabs) {
+      const tab = tabs[0];
+      if (tab.url?.startsWith('chrome://')) {
+        console.log('Open on chrome://');
+        return undefined;
+      }
+      try {
+        chrome.scripting.executeScript(
+          {
+            target: {tabId: tab.id},
+            function: () => {
+              // alert(getSelection().toString());
+              // document.getElementById('text-input').focus();
+              // document.getElementById('text-input').innerHTML = getSelection().toString();
+
+              chrome.storage.local.set({selectedText: getSelection().toString()});
+              // chrome.storage.local.set({selectedText: getSelection().toString().trim().replace(/\s\s+/g, ' ')});
+            }
+          }
+        );
+      } catch (err) {
+        console.error(`failed to execute script: ${err}`);
+      }
+    });
+    this.pasteSelectedText();
+    
+    ...
+  }
+
+  // // TODO Future: insert selected text
+  // pasteSelectedText() {
+  //   chrome.storage.local.get(['selectedText']).then((result) => {
+  //     this.textAreaInput.nativeElement.focus();
+  //     this.textAreaInput.nativeElement.value = result.selectedText;
+  //     console.log('selectedText: ' + result.selectedText);
+  //   });
+  //   chrome.storage.local.remove('selectedText');
+  // }
+
+```
 
 - https://developer.chrome.com/docs/extensions/reference/api/storage?hl=ru#sync
 
@@ -61,12 +110,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [x] Chrome Extensions | Migrate from Manifest V2 to Manifest V3  
 
-
 ## Fix Bugs 
 
-- [ ] йцукенгшщзхїфівапролджєячсмитьбю -> йцукенгшщзх ф вапролдж ячсмитьбю
+- [x] йцукенгшщзхїфівапролджєячсмитьбю → йцукенгшщзх ф вапролдж ячсмитьбю
 
-- [ ] fix Google analitick
+- [ ] pt with the replace() method and → Pt-With-The-Replace)-Method-And
+
+- [ ] a how as. s . s → aHowAsS.S
+
+- [ ] fix Google Analytics
 
 
 ## Info
