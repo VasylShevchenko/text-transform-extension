@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { LowerCasePipe, UpperCasePipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { environment } from '../environments/environment';
 import { AlertService } from './_alert/alert.service';
 import { VERSION } from '@angular/core';
@@ -21,65 +21,23 @@ export class AppComponent implements OnInit {
   @ViewChild('textAreaOutput', {static: true}) textAreaOutput: ElementRef;
 
   constructor(
-    private lowerCase: LowerCasePipe,
-    private UpperCase: UpperCasePipe,
     private TitleCase: TitleCasePipe,
     private alertSvc: AlertService,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    // // TODO Future: insert selected text
-    // chrome.tabs.query({active: true}, function(tabs) {
-    //   const tab = tabs[0];
-    //   if (tab.url?.startsWith('chrome://')) {
-    //     console.log('Open on chrome://');
-    //     return undefined;
-    //   }
-    //   try {
-    //     chrome.scripting.executeScript(
-    //       {
-    //         target: {tabId: tab.id},
-    //         function: () => {
-    //           // alert(getSelection().toString());
-    //           // document.getElementById('text-input').focus();
-    //           // document.getElementById('text-input').innerHTML = getSelection().toString();
-    //
-    //           chrome.storage.local.set({selectedText: getSelection().toString()});
-    //           // chrome.storage.local.set({selectedText: getSelection().toString().trim().replace(/\s\s+/g, ' ')});
-    //         }
-    //       }
-    //     );
-    //   } catch (err) {
-    //     console.error(`failed to execute script: ${err}`);
-    //   }
-    // });
-    // this.pasteSelectedText();
+    this.sendEventToAnalytics('extensionLaunched');
+    this.textAreaInput.nativeElement.focus();
 
-    const mode = environment.production ? 'Production' : 'Development';
-    console.log(mode + ' | Extension version: ' + environment.extension_version + '| Angular version: ' + VERSION.full);
+    const envMode    = environment.mode;
+    const extVersion = environment.extension_version;
+    const angVersion = VERSION.full;
+    console.log('Mode: ' + envMode + ' | Extension version: ' + extVersion + '| Angular version: ' + angVersion);
   }
 
-  // // TODO Future: insert selected text
-  // pasteSelectedText() {
-  //   chrome.storage.local.get(['selectedText']).then((result) => {
-  //     this.textAreaInput.nativeElement.focus();
-  //     this.textAreaInput.nativeElement.value = result.selectedText;
-  //     console.log('selectedText: ' + result.selectedText);
-  //   });
-  //   chrome.storage.local.remove('selectedText');
-  // }
-
-  convertToUpperCase() {
-    const textInput = this.getTextInput();
-    if (textInput === '') { return; }
-
-    this.sendEventToAnalytics('convertToUpperCase');
-
-    const textTransform = textInput.toUpperCase();
-
-    this.putTextOutput(textTransform);
-  }
+  // ============================================
+  // ========== GENERAL CASES ===================
+  // ============================================
 
   convertToLowerCase() {
     const textInput = this.getTextInput();
@@ -87,20 +45,20 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToLowerCase');
 
-    const textTransform = textInput.toLowerCase();
+    const result = textInput.toLowerCase();
 
-    this.putTextOutput(textTransform);
+    this.putTextOutput(result);
   }
 
-  convertToTitleCase() {
+  convertToUpperCase() {
     const textInput = this.getTextInput();
     if (textInput === '') { return; }
 
-    this.sendEventToAnalytics('convertToTitleCase');
+    this.sendEventToAnalytics('convertToUpperCase');
 
-    const textTransform = this.TitleCase.transform(textInput);
+    const result = textInput.toUpperCase();
 
-    this.putTextOutput(textTransform);
+    this.putTextOutput(result);
   }
 
   convertToSentenceCase() {
@@ -112,7 +70,7 @@ export class AppComponent implements OnInit {
     const text = textInput.toLowerCase();
 
     let result = '';
-    let letter;
+    let letter: string;
     let cap = true;
     let i: any;
     for (i in text) {
@@ -130,22 +88,40 @@ export class AppComponent implements OnInit {
     this.putTextOutput(result);
   }
 
+  convertToTitleCase() {
+    const textInput = this.getTextInput();
+    if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToTitleCase');
+
+    const result = this.TitleCase.transform(textInput);
+
+    this.putTextOutput(result);
+  }
+
+  // ============================================
+  // ========== PROGRAMMING CASES ===============
+  // ============================================
+
   convertToSnakeCase() {
     const textInput = this.getTextInputForProgramming();
     if (textInput === '') { return; }
 
     this.sendEventToAnalytics('convertToSnakeCase');
 
-    const text = textInput.toLowerCase();
+    const result = textInput.toLowerCase().replaceAll(' ', '_');
 
-    let result = '';
-    let letter;
-    let i: any;
-    for (i in text) {
-      letter = text.charAt(i);
-      if (letter === ' ') { letter = '_'; }
-      result += letter;
-    }
+    this.putTextOutput(result);
+  }
+
+  convertToScreamingSnake() {
+    const textInput = this.getTextInputForProgramming();
+    if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToScreamingSnake');
+
+    const result = textInput.toUpperCase().replaceAll(' ', '_');
+
     this.putTextOutput(result);
   }
 
@@ -155,7 +131,8 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToCamelCase');
 
-    const result = textInput.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+    const text = this.TitleCase.transform(textInput).replaceAll(' ', '');
+    const result = text.charAt(0).toLowerCase() + String(text).slice(1);
 
     this.putTextOutput(result);
   }
@@ -166,56 +143,8 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToPascalCase');
 
-    const text: any = this.TitleCase.transform(textInput);
+    const result: any = this.TitleCase.transform(textInput).replaceAll(' ', '');
 
-    let result = '';
-    let letter;
-    let i: any;
-    for (i in text) {
-      letter = text.charAt(i);
-      if (letter === ' ') {
-        letter = '';
-      }
-      result += letter;
-    }
-    this.putTextOutput(result);
-  }
-
-  convertToScreamingSnake() {
-    const textInput = this.getTextInputForProgramming();
-    if (textInput === '') { return; }
-
-    this.sendEventToAnalytics('convertToScreamingSnake');
-
-    const text = textInput.toUpperCase();
-
-    let result = '';
-    let letter;
-    let i: any;
-    for (i in text) {
-      letter = text.charAt(i);
-      if (letter === ' ') { letter = '_'; }
-      result += letter;
-    }
-    this.putTextOutput(result);
-  }
-
-  convertToTrainCase() {
-    const textInput = this.getTextInputForProgramming();
-    if (textInput === '') { return; }
-
-    this.sendEventToAnalytics('convertToTrainCase');
-
-    const text: any = this.TitleCase.transform(textInput);
-
-    let result = '';
-    let letter;
-    let i: any;
-    for (i in text) {
-      letter = text.charAt(i);
-      if (letter === ' ') { letter = '-'; }
-      result += letter;
-    }
     this.putTextOutput(result);
   }
 
@@ -225,18 +154,25 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToKebabCase');
 
-    const text = textInput.toLowerCase();
+    const result = textInput.toLowerCase().replaceAll(' ', '-');
 
-    let result = '';
-    let letter;
-    let i: any;
-    for (i in text) {
-      letter = text.charAt(i);
-      if (letter === ' ') { letter = '-'; }
-      result += letter;
-    }
     this.putTextOutput(result);
   }
+
+  convertToTrainCase() {
+    const textInput = this.getTextInputForProgramming();
+    if (textInput === '') { return; }
+
+    this.sendEventToAnalytics('convertToTrainCase');
+
+    const result = this.TitleCase.transform(textInput).replaceAll(' ', '-');
+
+    this.putTextOutput(result);
+  }
+
+  // ============================================
+  // ========== HELPERS  ========================
+  // ============================================
 
   getTextInput() {
     return this.textAreaInput.nativeElement.value.trim();
@@ -245,27 +181,17 @@ export class AppComponent implements OnInit {
   getTextInputForProgramming() {
     return this.textAreaInput.nativeElement.value
       .trim()
-      .replace(/[^a-zA-Zа-я 1-9\p{L} ]/u, '')
+      .replace(/[^a-zA-Zа-я 1-9\p{L}]/u, '')
       .trim()
       .replace(/\s\s+/g, ' ');
   }
 
-  putTextOutput(text) {
+  putTextOutput(text: string) {
     this.textAreaOutput.nativeElement.value = text;
     this.copyClipboard(text);
   }
 
-  sendEventToAnalytics(event) {
-    if (environment.production) {
-      try {
-        _gaq.push(['_trackEvent', event, 'clicked']);
-      } catch (error) {
-        console.log('can\'t send ga');
-      }
-    }
-  }
-
-  copyClipboard(text) {
+  copyClipboard(text: string) {
     if (text) {
       const textArea = document.createElement('textarea');
       textArea.value = text;
@@ -277,7 +203,6 @@ export class AppComponent implements OnInit {
       this.textAreaOutput.nativeElement.focus();
       this.textAreaOutput.nativeElement.select();
     }
-
   }
 
   clear() {

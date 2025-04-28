@@ -42,6 +42,7 @@
     },
     "interface-name": false,
     "max-classes-per-file": false,
+    "forin": true,
     "max-line-length": [
       true,
       140
