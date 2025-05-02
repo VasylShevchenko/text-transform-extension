@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertModule } from './_alert/alert.module';
+import { AlertModule } from './services/alert/alert.module';
 
 @NgModule({
   declarations: [

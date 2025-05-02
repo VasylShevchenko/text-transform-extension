@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LowerCasePipe, UpperCasePipe, TitleCasePipe } from '@angular/common';
-import { AlertService } from './_alert/alert.service';
+import { AlertService } from './services/alert/alert.service';
 
 
 const routes: Routes = [];

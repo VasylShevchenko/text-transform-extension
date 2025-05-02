@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
+import { AlertService } from './services/alert/alert.service';
 import { environment } from '../environments/environment';
-import { AlertService } from './_alert/alert.service';
 import { VERSION } from '@angular/core';
 
 declare var chrome;
@@ -21,18 +21,14 @@ export class AppComponent implements OnInit {
   @ViewChild('textAreaOutput', {static: true}) textAreaOutput: ElementRef;
 
   constructor(
-    private TitleCase: TitleCasePipe,
-    private alertSvc: AlertService,
+    private titleCase: TitleCasePipe,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
-    this.sendEventToAnalytics('extensionLaunched');
     this.textAreaInput.nativeElement.focus();
-
-    const envMode    = environment.mode;
-    const extVersion = environment.extension_version;
-    const angVersion = VERSION.full;
-    console.log('Mode: ' + envMode + ' | Extension version: ' + extVersion + '| Angular version: ' + angVersion);
+    this.sendEventToAnalytics('ExtensionLaunched');
+    this.showConsoleLog();
   }
 
   // ============================================
@@ -94,7 +90,7 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToTitleCase');
 
-    const result = this.TitleCase.transform(textInput);
+    const result = this.titleCase.transform(textInput);
 
     this.putTextOutput(result);
   }
@@ -131,7 +127,7 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToCamelCase');
 
-    const text = this.TitleCase.transform(textInput).replaceAll(' ', '');
+    const text = this.titleCase.transform(textInput).replaceAll(' ', '');
     const result = text.charAt(0).toLowerCase() + String(text).slice(1);
 
     this.putTextOutput(result);
@@ -143,7 +139,7 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToPascalCase');
 
-    const result: any = this.TitleCase.transform(textInput).replaceAll(' ', '');
+    const result: any = this.titleCase.transform(textInput).replaceAll(' ', '');
 
     this.putTextOutput(result);
   }
@@ -165,7 +161,7 @@ export class AppComponent implements OnInit {
 
     this.sendEventToAnalytics('convertToTrainCase');
 
-    const result = this.TitleCase.transform(textInput).replaceAll(' ', '-');
+    const result = this.titleCase.transform(textInput).replaceAll(' ', '-');
 
     this.putTextOutput(result);
   }
@@ -180,10 +176,9 @@ export class AppComponent implements OnInit {
 
   getTextInputForProgramming() {
     return this.textAreaInput.nativeElement.value
-      .trim()
-      .replace(/[^a-zA-Zа-я 1-9\p{L}]/u, '')
-      .trim()
-      .replace(/\s\s+/g, ' ');
+      .replace(/[^a-zA-Zа-я1-9]/g, ' ')
+      .replace(/\s\s+/g, ' ')
+      .trim();
   }
 
   putTextOutput(text: string) {
@@ -199,7 +194,7 @@ export class AppComponent implements OnInit {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      this.alertSvc.showCopy();
+      this.alertService.showCopy();
       this.textAreaOutput.nativeElement.focus();
       this.textAreaOutput.nativeElement.select();
     }
@@ -217,5 +212,14 @@ export class AppComponent implements OnInit {
   inputChange(text: string) {
     this.showClear = text;
   }
+
+  showConsoleLog() {
+    const envMode    = environment.mode;
+    const extVersion = environment.extension_version;
+    const angVersion = VERSION.full;
+    console.log('Mode: ' + envMode + ' | Extension version: ' + extVersion + '| Angular version: ' + angVersion);
+  }
+
+
 
 }
