@@ -23,7 +23,7 @@ $ ng build --watch
 
 2. open chrome and input: chrome://extensions/
 3. enable 'Developer mode'
-4. click 'Load unpacked extension…' and choose path/to/the/extension/dist/text-transform
+4. click 'Load unpacked extension…' and choose a path/to/the/extension/dist/text-transform
 5. click 'Enabled'
 
 # Production
@@ -48,15 +48,25 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [ ] Add words counter
 
+- [ ] Update Google Analytics
+
 - [ ] Add testing (https://angular.dev/guide/testing)
 
 - [ ] Code refactoring: Use ngSrc (NgOptimizedImage directive) to improve performance
 
 - [ ] Code refactoring: (input)="inputChange($event.target.value)"
 
-- [ ] Return Future: insert selected text from browser to extension
+- [ ] Return Future: insert selected text from a browser to extension
 
 ```angular
+
+// declare var chrome;
+
+
+   await chrome.storage.local.set({clientId});
+   await chrome.storage.local.get('clientId');
+   await getOrCreateClientId();
+  
   ngOnInit() {
     ...
   
@@ -64,9 +74,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     chrome.tabs.query({active: true}, function(tabs) {
       const tab = tabs[0];
       if (tab.url?.startsWith('chrome://')) {
+        this.sendEventToAnalytics('OpenOnChrome');
         console.log('Open on chrome://');
         return undefined;
       }
+      
+      if getSelection empty {
+        return;
+      }
+      else { 
+        continue
+        this.sendEventToAnalytics('getSelection');
+      }
+      
       try {
         chrome.scripting.executeScript(
           {
@@ -114,12 +134,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [x] йцукенгшщзхїфівапролджєячсмитьбю → йцукенгшщзх ф вапролдж ячсмитьбю
 
-- [ ] pt with the replace() method and → Pt-With-The-Replace)-Method-And
+- [x] pt with the replace() method and → Pt-With-The-Replace)-Method-And
 
-- [ ] a how as. s . s → aHowAsS.S
+- [x] a how as. s . s → aHowAsS.S
 
-- [ ] fix Google Analytics
+- [x] Google-analytics.service -> Googleanalytics.service
 
+- https://analytics.google.com/analytics/web
+- https://developer.chrome.com/docs/extensions/how-to/integrate/google-analytics-4?hl=ru
+- https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/functional-samples/tutorial.google-analytics
+- https://js2ts.com/conversion/054c22c4-cd84-4125-b0e8-430b531fa02a
+- https://stackoverflow.com/questions/64408056/google-analytics-4-and-the-measurement-protocol-api
+
+- https://netpeak.net/blog/how-to-work-with-measurement-protocol-in-google-analytics-4/
+- https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/
 
 ## Info
 [Chrome extension with Angular — from zero to a little hero](https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575)
