@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LowerCasePipe, UpperCasePipe, TitleCasePipe } from '@angular/common';
 import { AlertService } from './services/alert/alert.service';
+import { GoogleAnalyticsService } from './services/ga/google-analytics.service';
 
 
 const routes: Routes = [];
@@ -17,7 +18,8 @@ const routes: Routes = [];
     LowerCasePipe,
     UpperCasePipe,
     TitleCasePipe,
-    AlertService
+    AlertService,
+    GoogleAnalyticsService
   ]
 })
 export class AppRoutingModule { }

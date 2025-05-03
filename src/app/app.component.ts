@@ -1,11 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { AlertService } from './services/alert/alert.service';
+import { GoogleAnalyticsService } from './services/ga/google-analytics.service';
 import { environment } from '../environments/environment';
 import { VERSION } from '@angular/core';
-
-declare var chrome;
-declare var _gaq;
 
 @Component({
     selector: 'app-root',
@@ -23,6 +21,7 @@ export class AppComponent implements OnInit {
   constructor(
     private titleCase: TitleCasePipe,
     private alertService: AlertService,
+    private googleAnalyticsService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -175,8 +174,9 @@ export class AppComponent implements OnInit {
   }
 
   getTextInputForProgramming() {
+    // https://medium.com/@therkverma/check-special-characters-in-a-string-with-regular-expression-javascript-regex-7498674e6c28
     return this.textAreaInput.nativeElement.value
-      .replace(/[^a-zA-Zа-я1-9]/g, ' ')
+      .replace(/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?"№ʼ'\\]/g, ' ')
       .replace(/\s\s+/g, ' ')
       .trim();
   }
@@ -220,6 +220,9 @@ export class AppComponent implements OnInit {
     console.log('Mode: ' + envMode + ' | Extension version: ' + extVersion + '| Angular version: ' + angVersion);
   }
 
-
-
+  async sendEventToAnalytics(event: string) {
+    if (environment.production) {
+      this.googleAnalyticsService.fireEvent(event);
+    }
+  }
 }

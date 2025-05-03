@@ -7,7 +7,7 @@
   "description": "Easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.",
   "short_name": "TT",
   "content_security_policy": {
-    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; ",
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; ",
     "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
   },
   "action": {
@@ -23,7 +23,6 @@
   },
   "permissions": [
     "activeTab",
-    "scripting",
     "storage"
   ],
   "optional_host_permissions": [
