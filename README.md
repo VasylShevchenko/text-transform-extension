@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Text Transform Extension</h1>
-  <img src="doc/preview.gif" alt='preview.gif'>
+  <img src="documents/preview.gif" alt='preview.gif'>
 </div>
 
 Description: Chrome Extension for easily changes the regional texture: lower region, UPPER REGISTER, change of capital letters in review on the upper region.
@@ -15,21 +15,29 @@ On 03.2025: Installs: 731 | Stars: 5 | Version 2.0 | Last update: 2 Dec 2020
 
 
 # Development
-1. run command
+
+1. Open file *src/environments/environment.ts* and *src/environments/environment.ts* and update variables for Google Analytics:
+
+```console
+GA_MEASUREMENT_ID=take_from_google_analytics
+GA_API_SECRET=take_from_google_analytics
+```
+
+2. Run command:
 
 ```console
 $ ng build --watch
 ```
 
-2. open chrome and input: chrome://extensions/
-3. enable 'Developer mode'
-4. click 'Load unpacked extension…' and choose a path/to/the/extension/dist/text-transform
-5. click 'Enabled'
+3. Open chrome and input: chrome://extensions/
+4. Enable 'Developer mode'
+5. Click 'Load unpacked' and choose a path/to/the/extension/dist/text-transform
+6. click 'Enabled'
 
 # Production
 
 ```console
-$ ng build --configuration production
+$ ng build --configuration production --output-hashing none
 ```
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20. Current version of Angular CLI 19.2.8
@@ -47,8 +55,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## TODO
 
 - [ ] Add words counter
-
-- [ ] Update Google Analytics
 
 - [ ] Add testing (https://angular.dev/guide/testing)
 
@@ -123,12 +129,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ```
 
 - https://developer.chrome.com/docs/extensions/reference/api/storage?hl=ru#sync
-
 - https://stackoverflow.com/questions/66788838/chrome-scripting-executescript-unexpected-property-arguments
-
 - https://stackoverflow.com/questions/76994233/how-to-get-user-selected-text-in-chrome-extension-manifest-v3
 
 - [x] Chrome Extensions | Migrate from Manifest V2 to Manifest V3  
+
+- [x] Update to Google Analytics 4
+- https://analytics.google.com/analytics/web
+- https://developer.chrome.com/docs/extensions/how-to/integrate/google-analytics-4?hl=ru
+- https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/functional-samples/tutorial.google-analytics
+- https://js2ts.com/conversion/054c22c4-cd84-4125-b0e8-430b531fa02a
+- https://stackoverflow.com/questions/64408056/google-analytics-4-and-the-measurement-protocol-api
+
+- https://netpeak.net/blog/how-to-work-with-measurement-protocol-in-google-analytics-4/
+- https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/
+
+- [x] Fix onload="this.media='all'"
+- https://stackoverflow.com/questions/67834294/how-prevent-angular12-rendering-a-onload-property-on-the-link-tag-when-usin
+
 
 ## Fix Bugs 
 
@@ -140,14 +158,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [x] Google-analytics.service -> Googleanalytics.service
 
-- https://analytics.google.com/analytics/web
-- https://developer.chrome.com/docs/extensions/how-to/integrate/google-analytics-4?hl=ru
-- https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/functional-samples/tutorial.google-analytics
-- https://js2ts.com/conversion/054c22c4-cd84-4125-b0e8-430b531fa02a
-- https://stackoverflow.com/questions/64408056/google-analytics-4-and-the-measurement-protocol-api
-
-- https://netpeak.net/blog/how-to-work-with-measurement-protocol-in-google-analytics-4/
-- https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/
-
 ## Info
 [Chrome extension with Angular — from zero to a little hero](https://medium.com/angular-in-depth/chrome-extension-with-angular-why-and-how-778200b87575)
+
+# Change Log
+
+```console
+0. version 0.0.0 (21.12.2019)
+1. version 1.1.0 (07.02.2020)
+2. version 1.2.0 (24.02.2020)
+3. version 1.3.0 (29.03.2020)
+4. version 2.0.0 (27.12.2020)
+5. version 2.1.0 (05.05.2025)
+```
